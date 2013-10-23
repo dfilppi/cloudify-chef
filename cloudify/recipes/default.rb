@@ -21,6 +21,16 @@ require 'socket'
 public_ip=%x(curl ipecho.net/plain)
 private_ip=node[:network][:interfaces][:eth0][:addresses].to_hash.select {|addr, info| info["family"] == "inet"}.flatten.first
 
+cloudify "find-hosts" do
+  registered_min_hosts 2
+  sleep_time 1
+  search_type "tags"
+  search_result_type "ipAddress"
+  search_param "cloudify-manager"
+  node_attribute_name "cloudify-managers"
+  action :find_hosts
+end
+
 user node[:cloudify][:user] do
   action :create
   system true
@@ -37,6 +47,7 @@ remote_directory "#{node[:cloudify][:workdir]}/upload" do
   owner "root"
   mode "0755"
   source "upload"
+  recursive true
 end
 
 cookbook_file "#{node[:cloudify][:workdir]}/bootstrap-management.sh" do
@@ -82,6 +93,7 @@ template "#{node[:cloudify][:workdir]}/cloudify_env.sh" do
 		:working_dir => node[:cloudify][:workdir],
 		:private_ip => "#{private_ip}",
 		:public_ip => "#{public_ip}",
+                :locators => "15.185.180.177,15.185.158.164",
 		:cloud_file => "#{node[:cloudify][:workdir]}/#{node[:cloudify][:cloudfile]}",
 		:spring_security_file => "#{node[:cloudify][:workdir]}/spring-security.xml",
 		:cloudify_cloud_machine_id => node[:cloudify][:cloudmachineid],

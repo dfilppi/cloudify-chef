@@ -9,12 +9,12 @@ default[:cloudify][:cloudhardwareid]="az-2.region-a.geo-1/102"
 default[:cloudify][:cloudimageid]="az-2.region-a.geo-1/221"
 
 #cloud driver settings
-default[:cloudify][:clouduser]="YOUR KEY"
-default[:cloudify][:cloudtenant]="YOUR TENANT"
-default[:cloudify][:apikey]="YOUR SECRET KEY"
-default[:cloudify][:keyfile]="KEY FILE (E.G. KEY.PEM)"
-default[:cloudify][:keypair]="YOU KEYPAIR NAME: USUALLY THE FILE - .PEM"
-default[:cloudify][:securitygroup]="YOUR SECURITY GROUP"
+default[:cloudify][:clouduser]=
+default[:cloudify][:cloudtenant]=
+default[:cloudify][:apikey]=
+default[:cloudify][:keyfile]=
+default[:cloudify][:keypair]=
+default[:cloudify][:securitygroup]="default"
 default[:cloudify][:smalllinuxhardwareid]="az-2.region-a.geo-1/102"
 default[:cloudify][:smalllinuximageid]="az-2.region-a.geo-1/221"
 default[:cloudify][:ubuntuimageid]="az-2.region-a.geo-1/67070"
